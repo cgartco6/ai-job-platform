@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Accelerator | Smart Job Applications</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>AI Career Accelerator</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#testimonials">Success Stories</a></li>
+                    <li><a href="#" id="loginBtn">Login</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="showLogin">Login</button>
+                <button class="btn btn-primary" id="showRegister">Get Started</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i class="fas fa-bolt"></i> AI-Powered Job Applications
+            </div>
+            <h2>Let AI Find Your Dream Job While You Focus On What Matters</h2>
+            <p>Our advanced AI agents continuously search and apply for jobs on your behalf until you're employed. Just upload your CV, pay once, and let our system do the work.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>2,847+</h3>
+                    <p>Jobs Found</p>
+                </div>
+                <div class="stat">
+                    <h3>93%</h3>
+                    <p>Success Rate</p>
+                </div>
+                <div class="stat">
+                    <h3>R500</h3>
+                    <p>One-Time Fee</p>
+                </div>
+            </div>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" id="heroGetStarted">Start Your Job Search</button>
+                <button class="btn btn-outline" id="watchDemo">Watch Demo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Start Your AI Job Search</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="idNumber">South African ID Number</label>
+                    <input type="text" id="idNumber" name="idNumber" required pattern="[0-9]{13}">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" name="terms" required>
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Continue to Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Complete Your Registration</h2>
+            <div class="payment-summary">
+                <h3>Order Summary</h3>
+                <div class="payment-item">
+                    <span>AI Career Accelerator (Lifetime Access)</span>
+                    <span>R500.00</span>
+                </div>
+                <div class="payment-total">
+                    <strong>Total: R500.00</strong>
+                </div>
+            </div>
+            <div class="payment-options">
+                <h3>Choose Payment Method</h3>
+                <div class="payment-methods">
+                    <div class="payment-method" data-method="payfast">
+                        <i class="fab fa-cc-paypal"></i>
+                        <span>PayFast</span>
+                    </div>
+                    <div class="payment-method" data-method="payshap">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>PayShap</span>
+                    </div>
+                    <div class="payment-method" data-method="eft">
+                        <i class="fas fa-university"></i>
+                        <span>Direct EFT (FNB)</span>
+                    </div>
+                </div>
+            </div>
+            <button id="processPayment" class="btn btn-primary">Pay R500.00</button>
+        </div>
+    </div>
+
+    <!-- Features, How It Works, Pricing, Testimonials sections remain similar to previous implementation -->
+    
+    <script src="js/main.js"></script>
+</body>
+</html>
