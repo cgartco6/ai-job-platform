@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Accelerator | Smart Job Applications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --navy-blue: #0a1f44;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --light-blue: #f0f5ff;
+            --dark-blue: #06142e;
+            --gray: #6c757d;
+            --light-gray: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-blue);
+            color: var(--navy-blue);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--navy-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: var(--gold);
+            font-size: 1.8rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        /* Desktop Navigation */
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--gold);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+        
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy-blue);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Shopping Cart */
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: var(--white);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--gold);
+            color: var(--navy-blue);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            transition: all 0.3s;
+        }
+        
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: var(--navy-blue);
+            padding: 2rem;
+            transition: right 0.3s ease;
+            z-index: 1001;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mobile-nav.active {
+            right: 0;
+        }
+        
+        .close-menu {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+            margin-top: 3rem;
+        }
+        
+        .mobile-nav li {
+            margin-bottom: 1.5rem;
+        }
+        
+        .mobile-nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Shopping Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 350px;
+            height: 100vh;
+            background: var(--white);
+            padding: 2rem;
+            transition: right 0.3s ease;
+            z-index: 1002;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-modal.active {
+            right: 0;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .cart-items {
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .item-details h4 {
+            margin-bottom: 0.5rem;
+            color: var(--navy-blue);
+        }
+        
+        .item-price {
+            color: var(--gold);
+            font-weight: 600;
+        }
+        
+        .remove-item {
+            background: none;
+            border: none;
+            color: var(--danger, #dc3545);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .cart-total {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #eee;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .cart-actions {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .cart-actions .btn {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-blue) 100%);
+            color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--navy-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat h3 {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        /* Masked Photo Section */
+        .photo-section {
+            padding: 3rem 2rem;
+            background: var(--white);
+        }
+        
+        .photo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .masked-photo {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, var(--navy-blue) 0%, var(--dark-blue) 100%);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .masked-photo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><defs><mask id="shape-mask"><rect width="100" height="100" fill="white"/><circle cx="50" cy="40" r="25" fill="black"/><rect x="35" y="65" width="30" height="40" fill="black"/></mask></defs><rect width="100" height="100" mask="url(%23shape-mask)" fill="%23d4af37"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .photo-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .photo-content h2 {
+            font-size: 2.5rem;
+            color: var(--navy-blue);
+            line-height: 1.2;
+        }
+        
+        .photo-content p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background-color: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--navy-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: var(--light-blue);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(10, 31, 68, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            background: var(--navy-blue);
+            color: var(--gold);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--navy-blue);
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            padding: 5rem 2rem;
+            background-color: var(--light-blue);
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: var(--gold);
+            z-index: 1;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            padding: 0 1rem;
+        }
+        
+        .step-number {
+            background: var(--navy-blue);
+            color: var(--white);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            border: 5px solid var(--gold);
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 5rem 2rem;
+            background-color: var(--white);
+        }
+        
+        .pricing-card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 2.5rem;
+            text-align: center;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--gold);
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--navy-blue);
+            margin: 1rem 0;
+        }
+        
+        .price-period {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pricing-features i {
+            color: var(--gold);
+            margin-right: 10px;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 2rem;
+            background-color: var(--light-blue);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--navy-blue);
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+        }
+        
+        /* Chatbot */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: var(--navy-blue);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s;
+        }
+        
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .chatbot-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        
+        .chatbot-window.active {
+            display: flex;
+        }
+        
+        .chatbot-header {
+            background: var(--navy-blue);
+            color: var(--white);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chatbot-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--navy-blue);
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 0.8rem 1rem;
+            border-radius: 18px;
+            line-height: 1.4;
+        }
+        
+        .bot-message {
+            background: var(--light-blue);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .user-message {
+            background: var(--gold);
+            color: var(--navy-blue);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #eee;
+            gap: 0.5rem;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+        
+        .chatbot-input button {
+            background: var(--navy-blue);
+            color: var(--white);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--navy-blue);
+            color: var(--white);
+            padding: 3rem 2rem;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--gold);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--navy-blue);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Overlay for modals */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .photo-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .masked-photo {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .steps {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .steps::before {
+                display: none;
+            }
+            
+            .chatbot-window {
+                width: 300px;
+                height: 450px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>AI Career Accelerator</h1>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="desktop-nav">
+                <nav>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#testimonials">Success Stories</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Shopping Cart Icon -->
+                <div class="cart-icon" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+                
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="showLogin">Login</button>
+                    <button class="btn btn-primary" id="showRegister">Get Started</button>
+                </div>
+            </div>
+            
+            <!-- Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="close-menu" id="closeMenu">&times;</button>
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Success Stories</a></li>
+            <li><a href="#" id="mobileLogin">Login</a></li>
+            <li>
+                <div class="cart-icon" id="mobileCartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                    <span style="margin-left: 10px;">Cart</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically added here -->
+        </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cartTotal">R0.00</span>
+        </div>
+        <div class="cart-actions">
+            <button class="btn btn-primary" id="checkoutBtn">Proceed to Checkout</button>
+            <button class="btn btn-outline" id="continueShopping">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Overlay for modals -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i class="fas fa-bolt"></i> AI-Powered Job Applications
+            </div>
+            <h2>Let AI Find Your Dream Job While You Focus On What Matters</h2>
+            <p>Our advanced AI agents continuously search and apply for jobs on your behalf until you're employed. Just upload your CV, pay once, and let our system do the work.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <h3>2,847+</h3>
+                    <p>Jobs Found</p>
+                </div>
+                <div class="stat">
+                    <h3>93%</h3>
+                    <p>Success Rate</p>
+                </div>
+                <div class="stat">
+                    <h3>R500</h3>
+                    <p>One-Time Fee</p>
+                </div>
+            </div>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" id="heroGetStarted">Start Your Job Search</button>
+                <button class="btn btn-outline" id="watchDemo">Watch Demo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Masked Photo Section -->
+    <section class="photo-section">
+        <div class="photo-container">
+            <div class="masked-photo">
+                <!-- Masked photo placeholder - would be replaced with actual image in production -->
+                <i class="fas fa-user-tie" style="font-size: 4rem; color: var(--gold); opacity: 0.7;"></i>
+            </div>
+            <div class="photo-content">
+                <h2>Professional Profile Enhancement</h2>
+                <p>Our AI analyzes your photo and creates a professional, industry-appropriate representation that increases your chances of getting noticed by employers.</p>
+                <p>We use advanced masking techniques to ensure your privacy while maintaining a professional appearance that aligns with your target industry.</p>
+                <button class="btn btn-primary">Learn More About Our Process</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>Powerful AI Job Search Features</h2>
+            <p>Our platform uses cutting-edge AI technology to automate your job search process</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>AI CV Enhancement</h3>
+                <p>Our AI analyzes and rewrites your CV to maximize visibility and match job descriptions perfectly.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Intelligent Job Matching</h3>
+                <p>Deep learning algorithms match your profile with the most suitable job opportunities.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <h3>Auto Applications</h3>
+                <p>AI agents automatically apply to relevant jobs 24/7 until you're successfully employed.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <h3>Real-time Updates</h3>
+                <p>Get instant notifications via SMS, Email, and WhatsApp on applications and interviews.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Military-Grade Security</h3>
+                <p>Your data is protected with enterprise-level encryption and fraud prevention systems.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Performance Dashboard</h3>
+                <p>Track applications, interviews, and success metrics through your personal dashboard.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-title">
+            <h2>How It Works In 4 Simple Steps</h2>
+            <p>Get started with our AI job application platform in minutes</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Register & Pay</h3>
+                <p>Create your account with South African ID verification and pay the one-time R500 fee.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Upload Documents</h3>
+                <p>Upload your CV, qualifications, and professional photo. No CV? Our AI will create one for you.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>AI Takes Over</h3>
+                <p>Our AI scans job portals, applies automatically, and tracks all applications on your behalf.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Get Hired</h3>
+                <p>Receive interview invitations and job offers. AI stops applications once you're employed.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="section-title">
+            <h2>Simple, Transparent Pricing</h2>
+            <p>One-time payment for lifetime access to our AI job application service</p>
+        </div>
+        <div class="pricing-card">
+            <h3>AI Career Accelerator</h3>
+            <div class="price">R500</div>
+            <div class="price-period">One-time payment • Lifetime access</div>
+            <ul class="pricing-features">
+                <li><i class="fas fa-check"></i> AI CV Enhancement</li>
+                <li><i class="fas fa-check"></i> Automatic Job Applications</li>
+                <li><i class="fas fa-check"></i> Real-time Notifications</li>
+                <li><i class="fas fa-check"></i> Personal Dashboard</li>
+                <li><i class="fas fa-check"></i> Multi-channel Support</li>
+                <li><i class="fas fa-check"></i> Until Employment Guarantee</li>
+            </ul>
+            <button class="btn btn-primary" id="addToCart" style="width: 100%;">Add to Cart - R500</button>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-title">
+            <h2>Success Stories</h2>
+            <p>Hear from people who found their dream jobs with our AI platform</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "After 6 months of fruitless job searching, I signed up for AI Career Accelerator. Within 3 weeks, I had 5 interviews and landed a position with a 30% salary increase. The AI found opportunities I would have never discovered on my own."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">TN</div>
+                    <div>
+                        <h4>Thando Ndlovu</h4>
+                        <p>Software Developer, Cape Town</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "As a recent graduate with no work experience, I was struggling to get noticed. The AI rewrote my CV to highlight my skills effectively, and I received my first job offer just 2 weeks after signing up. This platform is a game-changer!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SM</div>
+                    <div>
+                        <h4>Siyabonga Mbeki</h4>
+                        <p>Marketing Assistant, Johannesburg</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "I was skeptical at first, but the AI applications were so targeted that I only received calls for roles that perfectly matched my skills and career goals. The dashboard kept me informed every step of the way. Worth every cent!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AM</div>
+                    <div>
+                        <h4>Anathi Petersen</h4>
+                        <p>Financial Analyst, Durban</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>AI Career Accelerator</h3>
+                <p>Revolutionizing job searching with artificial intelligence and automation for South African professionals.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Data Protection</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><a href="mailto:support@costbyte.co.za"><i class="fas fa-envelope"></i> support@costbyte.co.za</a></li>
+                    <li><a href="https://wa.me/27721423125" target="_blank"><i class="fab fa-whatsapp"></i> 072 142 3125</a></li>
+                    <li><i class="fas fa-map-marker-alt"></i> Cape Town, South Africa</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 AI Career Accelerator. All rights reserved. For South African citizens only.</p>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-avatar">B</div>
+                <div>
+                    <h4>Bronwyn</h4>
+                    <p>AI Career Assistant</p>
+                </div>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    Hi there! I'm Bronwyn, your AI career assistant. How can I help you today?
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatInput" placeholder="Type your message...">
+                <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+        <button class="chatbot-toggle" id="chatbotToggle">
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
+
+    <!-- Registration and Payment Modals would go here (omitted for brevity) -->
+
+    <script>
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initApp();
+        });
+
+        function initApp() {
+            // Initialize shopping cart
+            initShoppingCart();
+            
+            // Initialize navigation
+            initNavigation();
+            
+            // Initialize chatbot
+            initChatbot();
+            
+            // Initialize self-healing system
+            initSelfHealingSystem();
+            
+            // Initialize event listeners
+            initEventListeners();
+            
+            // Initialize smooth scrolling
+            initSmoothScrolling();
+        }
+
+        // Shopping Cart Functionality
+        function initShoppingCart() {
+            let cart = JSON.parse(localStorage.getItem('aiCareerCart')) || [];
+            updateCartDisplay();
+            
+            // Add to cart button
+            document.getElementById('addToCart').addEventListener('click', function() {
+                const product = {
+                    id: 1,
+                    name: 'AI Career Accelerator',
+                    price: 500,
+                    quantity: 1
+                };
+                
+                // Check if product already in cart
+                const existingItemIndex = cart.findIndex(item => item.id === product.id);
+                
+                if (existingItemIndex !== -1) {
+                    cart[existingItemIndex].quantity += 1;
+                } else {
+                    cart.push(product);
+                }
+                
+                localStorage.setItem('aiCareerCart', JSON.stringify(cart));
+                updateCartDisplay();
+                showNotification('Product added to cart!', 'success');
+            });
+            
+            // Checkout button
+            document.getElementById('checkoutBtn').addEventListener('click', function() {
+                if (cart.length === 0) {
+                    showNotification('Your cart is empty!', 'error');
+                    return;
+                }
+                
+                // In a real implementation, this would redirect to checkout
+                showNotification('Proceeding to checkout...', 'success');
+                setTimeout(() => {
+                    // Simulate checkout process
+                    showNotification('Checkout completed successfully!', 'success');
+                    cart = [];
+                    localStorage.setItem('aiCareerCart', JSON.stringify(cart));
+                    updateCartDisplay();
+                    closeCartModal();
+                }, 1500);
+            });
+            
+            // Continue shopping button
+            document.getElementById('continueShopping').addEventListener('click', function() {
+                closeCartModal();
+            });
+        }
+
+        function updateCartDisplay() {
+            const cart = JSON.parse(localStorage.getItem('aiCareerCart')) || [];
+            const cartCount = document.querySelectorAll('.cart-count');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            // Update cart count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.forEach(count => {
+                count.textContent = totalItems;
+            });
+            
+            // Update cart items
+            cartItems.innerHTML = '';
+            let total = 0;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: var(--gray);">Your cart is empty</p>';
+            } else {
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <div class="item-details">
+                            <h4>${item.name}</h4>
+                            <div class="item-price">R${item.price} x ${item.quantity}</div>
+                        </div>
+                        <button class="remove-item" data-id="${item.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    
+                    cartItems.appendChild(cartItem);
+                });
+                
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const itemId = parseInt(this.getAttribute('data-id'));
+                        removeFromCart(itemId);
+                    });
+                });
+            }
+            
+            // Update total
+            cartTotal.textContent = `R${total}.00`;
+        }
+
+        function removeFromCart(itemId) {
+            let cart = JSON.parse(localStorage.getItem('aiCareerCart')) || [];
+            cart = cart.filter(item => item.id !== itemId);
+            localStorage.setItem('aiCareerCart', JSON.stringify(cart));
+            updateCartDisplay();
+            showNotification('Item removed from cart', 'info');
+        }
+
+        function openCartModal() {
+            document.getElementById('cartModal').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCartModal() {
+            document.getElementById('cartModal').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Navigation Functionality
+        function initNavigation() {
+            const hamburger = document.getElementById('hamburger');
+            const mobileNav = document.getElementById('mobileNav');
+            const closeMenu = document.getElementById('closeMenu');
+            const overlay = document.getElementById('overlay');
+            const cartIcon = document.getElementById('cartIcon');
+            const mobileCartIcon = document.getElementById('mobileCartIcon');
+            const closeCart = document.getElementById('closeCart');
+            
+            // Hamburger menu toggle
+            hamburger.addEventListener('click', function() {
+                mobileNav.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close mobile menu
+            closeMenu.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Cart icon click
+            cartIcon.addEventListener('click', openCartModal);
+            mobileCartIcon.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                openCartModal();
+            });
+            
+            // Close cart
+            closeCart.addEventListener('click', closeCartModal);
+            
+            // Close modals when clicking overlay
+            overlay.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                closeCartModal();
+            });
+        }
+
+        // Chatbot Functionality
+        function initChatbot() {
+            const chatbotToggle = document.getElementById('chatbotToggle');
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            const sendMessage = document.getElementById('sendMessage');
+            const chatInput = document.getElementById('chatInput');
+            const chatbotMessages = document.getElementById('chatbotMessages');
+            
+            // Toggle chatbot window
+            chatbotToggle.addEventListener('click', function() {
+                chatbotWindow.classList.toggle('active');
+            });
+            
+            // Send message
+            sendMessage.addEventListener('click', function() {
+                sendChatMessage();
+            });
+            
+            // Send message on Enter key
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendChatMessage();
+                }
+            });
+        }
+
+        function sendChatMessage() {
+            const chatInput = document.getElementById('chatInput');
+            const chatbotMessages = document.getElementById('chatbotMessages');
+            const message = chatInput.value.trim();
+            
+            if (message === '') return;
+            
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = message;
+            chatbotMessages.appendChild(userMessage);
+            
+            // Clear input
+            chatInput.value = '';
+            
+            // Scroll to bottom
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            
+            // Simulate AI response
+            setTimeout(() => {
+                const botResponse = generateBotResponse(message);
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot-message';
+                botMessage.textContent = botResponse;
+                chatbotMessages.appendChild(botMessage);
+                
+                // Scroll to bottom
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }, 1000);
+        }
+
+        function generateBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                return "Hello! I'm Bronwyn, your AI career assistant. How can I help you with your job search today?";
+            } else if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('fee')) {
+                return "Our AI Career Accelerator service costs R500 as a one-time payment for lifetime access. There are no hidden fees or additional charges!";
+            } else if (lowerMessage.includes('how it works') || lowerMessage.includes('process') || lowerMessage.includes('work')) {
+                return "It's simple: 1) Register and pay R500, 2) Upload your documents, 3) Our AI applies to jobs for you, 4) You get hired! The AI stops once you're employed.";
+            } else if (lowerMessage.includes('cv') || lowerMessage.includes('resume')) {
+                return "Our AI can both enhance your existing CV or create a new one from scratch if you don't have one. We'll make sure it's optimized for your target industry.";
+            } else if (lowerMessage.includes('contact') || lowerMessage.includes('support') || lowerMessage.includes('help')) {
+                return "You can reach our support team at support@costbyte.co.za or call/WhatsApp us at 072 142 3125. We're here to help!";
+            } else if (lowerMessage.includes('payment') || lowerMessage.includes('pay') || lowerMessage.includes('checkout')) {
+                return "We accept PayFast, PayShap, and direct EFT payments. All transactions are secure and encrypted.";
+            } else {
+                return "I understand you're asking about '" + message + "'. For detailed information about our services, pricing, or how to get started, please visit our website or contact our support team at support@costbyte.co.za.";
+            }
+        }
+
+        // Self-Healing System
+        function initSelfHealingSystem() {
+            console.log('Self-healing system initialized');
+            
+            // Monitor for errors and attempt recovery
+            window.addEventListener('error', function(e) {
+                console.log('Self-healing: Error detected, attempting recovery...');
+                // In a real implementation, this would have more sophisticated recovery logic
+                showNotification('System issue detected and resolved automatically', 'info');
+            });
+            
+            // Periodically check system health
+            setInterval(() => {
+                // Simulate system health check
+                const healthStatus = checkSystemHealth();
+                if (!healthStatus.healthy) {
+                    console.log('Self-healing: Performing system maintenance...');
+                    // Perform maintenance tasks
+                    performSystemMaintenance();
+                }
+            }, 30000); // Check every 30 seconds
+        }
+
+        function checkSystemHealth() {
+            // Simulate health check - in a real system this would check various components
+            return {
+                healthy: Math.random() > 0.1, // 90% chance of being healthy
+                timestamp: new Date().toISOString()
+            };
+        }
+
+        function performSystemMaintenance() {
+            // Simulate maintenance tasks
+            console.log('Self-healing: Maintenance performed');
+            // In a real implementation, this would fix detected issues
+        }
+
+        // Utility Functions
+        function initEventListeners() {
+            // Get Started buttons
+            document.getElementById('heroGetStarted').addEventListener('click', function() {
+                document.getElementById('addToCart').click();
+            });
+            
+            // Watch Demo button
+            document.getElementById('watchDemo').addEventListener('click', function() {
+                showNotification('Demo video would play here', 'info');
+            });
+        }
+
+        function initSmoothScrolling() {
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId.startsWith('#')) {
+                        const targetElement = document.querySelector(targetId);
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        function showNotification(message, type = 'info') {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notification => notification.remove());
+            
+            // Create new notification
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-${getNotificationIcon(type)}"></i>
+                    <span>${message}</span>
+                    <button class="notification-close">&times;</button>
+                </div>
+            `;
+            
+            // Add styles
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${getNotificationColor(type)};
+                color: white;
+                padding: 1rem;
+                border-radius: 4px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 1002;
+                max-width: 400px;
+                animation: slideInRight 0.3s ease-out;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.style.animation = 'slideOutRight 0.3s ease-in';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 5000);
+            
+            // Close button
+            notification.querySelector('.notification-close').addEventListener('click', () => {
+                notification.remove();
+            });
+        }
+
+        function getNotificationIcon(type) {
+            const icons = {
+                success: 'check-circle',
+                error: 'exclamation-circle',
+                warning: 'exclamation-triangle',
+                info: 'info-circle'
+            };
+            return icons[type] || 'info-circle';
+        }
+
+        function getNotificationColor(type) {
+            const colors = {
+                success: '#28a745',
+                error: '#dc3545',
+                warning: '#ffc107',
+                info: 'var(--navy-blue)'
+            };
+            return colors[type] || 'var(--navy-blue)';
+        }
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+            
+            .notification-content {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+            
+            .notification-close {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 1.2rem;
+                cursor: pointer;
+                margin-left: auto;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
