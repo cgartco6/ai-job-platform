@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Career Accelerator | Smart Job Applications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --navy-blue: #0a1f44;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --light-blue: #f0f5ff;
+            --dark-blue: #06142e;
+            --gray: #6c757d;
+            --light-gray: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-blue);
+            color: var(--navy-blue);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--navy-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: var(--gold);
+            font-size: 1.8rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--gold);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+        
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy-blue);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--navy-blue) 0%, var(--dark-blue) 100%);
+            color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--navy-blue);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background-color: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--navy-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: var(--light-blue);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(10, 31, 68, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            background: var(--navy-blue);
+            color: var(--gold);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--navy-blue);
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            padding: 5rem 2rem;
+            background-color: var(--light-blue);
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: var(--gold);
+            z-index: 1;
+        }
+        
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            padding: 0 1rem;
+        }
+        
+        .step-number {
+            background: var(--navy-blue);
+            color: var(--white);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            border: 5px solid var(--gold);
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 5rem 2rem;
+            background-color: var(--white);
+        }
+        
+        .pricing-card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 2.5rem;
+            text-align: center;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--gold);
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--navy-blue);
+            margin: 1rem 0;
+        }
+        
+        .price-period {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        .pricing-features li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .pricing-features i {
+            color: var(--gold);
+            margin-right: 10px;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 2rem;
+            background-color: var(--light-blue);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--navy-blue);
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--navy-blue);
+            color: var(--white);
+            padding: 3rem 2rem;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--gold);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--navy-blue);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .steps {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            
+            .steps::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>AI Career Accelerator</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#testimonials">Success Stories</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline">Login</button>
+                <button class="btn btn-primary">Get Started</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <i class="fas fa-bolt"></i> AI-Powered Job Applications
+            </div>
+            <h2>Let AI Find Your Dream Job While You Focus On What Matters</h2>
+            <p>Our advanced AI agents continuously search and apply for jobs on your behalf until you're employed. Just upload your CV, pay once, and let our system do the work.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">Start Your Job Search</button>
+                <button class="btn btn-outline">Watch Demo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>Powerful AI Job Search Features</h2>
+            <p>Our platform uses cutting-edge AI technology to automate your job search process</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>AI CV Enhancement</h3>
+                <p>Our AI analyzes and rewrites your CV to maximize visibility and match job descriptions perfectly.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>Intelligent Job Matching</h3>
+                <p>Deep learning algorithms match your profile with the most suitable job opportunities.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <h3>Auto Applications</h3>
+                <p>AI agents automatically apply to relevant jobs 24/7 until you're successfully employed.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <h3>Real-time Updates</h3>
+                <p>Get instant notifications via SMS, Email, and WhatsApp on applications and interviews.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Military-Grade Security</h3>
+                <p>Your data is protected with enterprise-level encryption and fraud prevention systems.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Performance Dashboard</h3>
+                <p>Track applications, interviews, and success metrics through your personal dashboard.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-title">
+            <h2>How It Works In 4 Simple Steps</h2>
+            <p>Get started with our AI job application platform in minutes</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Register & Pay</h3>
+                <p>Create your account with South African ID verification and pay the one-time R500 fee.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Upload Documents</h3>
+                <p>Upload your CV, qualifications, and professional photo. No CV? Our AI will create one for you.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>AI Takes Over</h3>
+                <p>Our AI scans job portals, applies automatically, and tracks all applications on your behalf.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Get Hired</h3>
+                <p>Receive interview invitations and job offers. AI stops applications once you're employed.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="section-title">
+            <h2>Simple, Transparent Pricing</h2>
+            <p>One-time payment for lifetime access to our AI job application service</p>
+        </div>
+        <div class="pricing-card">
+            <h3>AI Career Accelerator</h3>
+            <div class="price">R500</div>
+            <div class="price-period">One-time payment • Lifetime access</div>
+            <ul class="pricing-features">
+                <li><i class="fas fa-check"></i> AI CV Enhancement</li>
+                <li><i class="fas fa-check"></i> Automatic Job Applications</li>
+                <li><i class="fas fa-check"></i> Real-time Notifications</li>
+                <li><i class="fas fa-check"></i> Personal Dashboard</li>
+                <li><i class="fas fa-check"></i> Multi-channel Support</li>
+                <li><i class="fas fa-check"></i> Until Employment Guarantee</li>
+            </ul>
+            <button class="btn btn-primary" style="width: 100%;">Get Started Now</button>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--gray);">+ R500 per successful job application</p>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-title">
+            <h2>Success Stories</h2>
+            <p>Hear from people who found their dream jobs with our AI platform</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "After 6 months of fruitless job searching, I signed up for AI Career Accelerator. Within 3 weeks, I had 5 interviews and landed a position with a 30% salary increase. The AI found opportunities I would have never discovered on my own."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">TN</div>
+                    <div>
+                        <h4>Thando Ndlovu</h4>
+                        <p>Software Developer, Cape Town</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "As a recent graduate with no work experience, I was struggling to get noticed. The AI rewrote my CV to highlight my skills effectively, and I received my first job offer just 2 weeks after signing up. This platform is a game-changer!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SM</div>
+                    <div>
+                        <h4>Siyabonga Mbeki</h4>
+                        <p>Marketing Assistant, Johannesburg</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "I was skeptical at first, but the AI applications were so targeted that I only received calls for roles that perfectly matched my skills and career goals. The dashboard kept me informed every step of the way. Worth every cent!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">AM</div>
+                    <div>
+                        <h4>Anathi Petersen</h4>
+                        <p>Financial Analyst, Durban</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>AI Career Accelerator</h3>
+                <p>Revolutionizing job searching with artificial intelligence and automation for South African professionals.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Data Protection</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@aicareer.co.za</li>
+                    <li><i class="fas fa-phone"></i> +27 21 123 4567</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Cape Town, South Africa</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 AI Career Accelerator. All rights reserved. For South African citizens only.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple shopping cart functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const getStartedButtons = document.querySelectorAll('.btn-primary');
+            
+            getStartedButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Thank you for your interest! You will be redirected to the registration page.');
+                    // In a real implementation, this would redirect to the registration page
+                });
+            });
+            
+            // Add smooth scrolling for navigation links
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
