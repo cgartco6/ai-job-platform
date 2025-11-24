@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobMatch AI - Intelligent Recruitment Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --success: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --danger: #e63946;
+            --warning: #fca311;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(rgba(67, 97, 238, 0.9), rgba(58, 12, 163, 0.9)), url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3') center/cover;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Forms */
+        .form-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+        
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .form-switch {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            display: none;
+            padding: 2rem 0;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-nav {
+            display: flex;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            flex: 1;
+        }
+        
+        .nav-item.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .card h3 i {
+            margin-right: 10px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .applicant-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .applicant-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .applicant-item:last-child {
+            border-bottom: none;
+        }
+        
+        .applicant-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .applicant-info {
+            flex: 1;
+        }
+        
+        .applicant-name {
+            font-weight: 600;
+        }
+        
+        .applicant-position {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .applicant-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.8rem;
+        }
+        
+        .job-card {
+            border-left: 4px solid var(--primary);
+        }
+        
+        .job-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+        
+        .job-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* Test Applicant View */
+        .test-applicant {
+            display: none;
+            padding: 2rem 0;
+        }
+        
+        .job-listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .job-listing {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .job-listing:hover {
+            transform: translateY(-5px);
+        }
+        
+        .company-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .job-features {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+        
+        .feature {
+            background-color: #f8f9fa;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        /* Upload Section */
+        .upload-section {
+            margin-top: 2rem;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1rem;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary);
+            background-color: #f8f9fa;
+        }
+        
+        .upload-area i {
+            font-size: 3rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+        
+        .uploaded-files {
+            margin-top: 1.5rem;
+        }
+        
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .file-icon {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #495057;
+            color: #adb5bd;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .dashboard-nav {
+                flex-direction: column;
+            }
+            
+            .dashboard-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>JobMatch AI</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="loginBtn">Login</button>
+                    <button class="btn btn-primary" id="registerBtn">Register</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>AI-Powered Recruitment Platform</h1>
+            <p>Streamline your hiring process with our intelligent job matching, automated screening, and dynamic dashboard for employers.</p>
+            <button class="btn btn-primary" id="getStartedBtn">Get Started</button>
+        </div>
+    </section>
+
+    <!-- Login Form -->
+    <div class="container">
+        <div class="form-container" id="loginForm">
+            <h2><i class="fas fa-sign-in-alt"></i> Login to Your Account</h2>
+            <form id="loginFormElement">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label for="userType">Login As</label>
+                    <select class="form-control" id="userType">
+                        <option value="employer">Employer</option>
+                        <option value="applicant">Applicant</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <div class="form-footer">
+                <a href="#">Forgot your password?</a>
+            </div>
+            <div class="form-switch">
+                <p>Don't have an account? <a href="#" id="showRegister">Register</a></p>
+            </div>
+        </div>
+
+        <!-- Register Form -->
+        <div class="form-container" id="registerForm" style="display: none;">
+            <h2><i class="fas fa-user-plus"></i> Create an Account</h2>
+            <form id="registerFormElement">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" class="form-control" id="registerName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email Address</label>
+                    <input type="email" class="form-control" id="registerEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" class="form-control" id="registerPassword" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="registerConfirmPassword" placeholder="Confirm your password" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerType">Account Type</label>
+                    <select class="form-control" id="registerType">
+                        <option value="employer">Employer</option>
+                        <option value="applicant">Applicant</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+            </form>
+            <div class="form-switch">
+                <p>Already have an account? <a href="#" id="showLogin">Login</a></p>
+            </div>
+        </div>
+
+        <!-- Owner Dashboard -->
+        <div class="dashboard" id="ownerDashboard">
+            <div class="dashboard-header">
+                <h2>Employer Dashboard</h2>
+                <div>
+                    <button class="btn btn-outline" id="testAsApplicantBtn">Test as Applicant</button>
+                    <button class="btn btn-primary" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+            
+            <div class="dashboard-nav">
+                <div class="nav-item active" data-tab="overview">Overview</div>
+                <div class="nav-item" data-tab="jobs">Job Postings</div>
+                <div class="nav-item" data-tab="applicants">Applicants</div>
+                <div class="nav-item" data-tab="ai-tools">AI Tools</div>
+                <div class="nav-item" data-tab="settings">Settings</div>
+            </div>
+            
+            <div class="dashboard-content" id="dashboardContent">
+                <!-- Overview Tab Content -->
+                <div class="tab-content active" id="overview">
+                    <div class="card">
+                        <h3><i class="fas fa-chart-line"></i> Performance Overview</h3>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <div class="stat-value">24</div>
+                                <div class="stat-label">Active Jobs</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">156</div>
+                                <div class="stat-label">Total Applicants</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">12</div>
+                                <div class="stat-label">Interviews Scheduled</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">87%</div>
+                                <div class="stat-label">AI Match Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-bell"></i> Recent Activity</h3>
+                        <div class="applicant-list">
+                            <div class="applicant-item">
+                                <div class="applicant-avatar">JS</div>
+                                <div class="applicant-info">
+                                    <div class="applicant-name">John Smith</div>
+                                    <div class="applicant-position">Applied for Senior Developer</div>
+                                </div>
+                                <div class="applicant-actions">
+                                    <button class="btn btn-primary btn-sm">View</button>
+                                </div>
+                            </div>
+                            <div class="applicant-item">
+                                <div class="applicant-avatar">MJ</div>
+                                <div class="applicant-info">
+                                    <div class="applicant-name">Maria Johnson</div>
+                                    <div class="applicant-position">Applied for UX Designer</div>
+                                </div>
+                                <div class="applicant-actions">
+                                    <button class="btn btn-primary btn-sm">View</button>
+                                </div>
+                            </div>
+                            <div class="applicant-item">
+                                <div class="applicant-avatar">AR</div>
+                                <div class="applicant-info">
+                                    <div class="applicant-name">Alex Rodriguez</div>
+                                    <div class="applicant-position">Applied for Product Manager</div>
+                                </div>
+                                <div class="applicant-actions">
+                                    <button class="btn btn-primary btn-sm">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-rocket"></i> AI Recommendations</h3>
+                        <p>Our AI suggests optimizing your job descriptions with specific keywords to attract 25% more qualified candidates.</p>
+                        <button class="btn btn-primary" style="margin-top: 1rem;">Optimize Now</button>
+                    </div>
+                </div>
+                
+                <!-- Jobs Tab Content -->
+                <div class="tab-content" id="jobs" style="display: none;">
+                    <div class="card job-card">
+                        <div class="job-title">Senior Frontend Developer</div>
+                        <div class="job-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                            <span><i class="fas fa-clock"></i> Full-time</span>
+                            <span><i class="fas fa-dollar-sign"></i> $90,000 - $120,000</span>
+                        </div>
+                        <p>We're looking for an experienced frontend developer to join our team and help build the next generation of web applications.</p>
+                        <div class="job-actions">
+                            <button class="btn btn-primary btn-sm">Edit</button>
+                            <button class="btn btn-outline btn-sm">View Applicants (24)</button>
+                            <button class="btn btn-outline btn-sm">Deactivate</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card job-card">
+                        <div class="job-title">UX/UI Designer</div>
+                        <div class="job-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> New York, NY</span>
+                            <span><i class="fas fa-clock"></i> Full-time</span>
+                            <span><i class="fas fa-dollar-sign"></i> $75,000 - $95,000</span>
+                        </div>
+                        <p>Join our design team to create beautiful and intuitive user experiences for our products.</p>
+                        <div class="job-actions">
+                            <button class="btn btn-primary btn-sm">Edit</button>
+                            <button class="btn btn-outline btn-sm">View Applicants (18)</button>
+                            <button class="btn btn-outline btn-sm">Deactivate</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card job-card">
+                        <div class="job-title">Data Scientist</div>
+                        <div class="job-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> San Francisco, CA</span>
+                            <span><i class="fas fa-clock"></i> Full-time</span>
+                            <span><i class="fas fa-dollar-sign"></i> $110,000 - $140,000</span>
+                        </div>
+                        <p>Help us derive insights from large datasets and build predictive models to drive business decisions.</p>
+                        <div class="job-actions">
+                            <button class="btn btn-primary btn-sm">Edit</button>
+                            <button class="btn btn-outline btn-sm">View Applicants (12)</button>
+                            <button class="btn btn-outline btn-sm">Deactivate</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3><i class="fas fa-plus"></i> Create New Job</h3>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Post New Job</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Applicant View -->
+        <div class="test-applicant" id="testApplicantView">
+            <div class="dashboard-header">
+                <h2>Applicant View - Job Search</h2>
+                <div>
+                    <button class="btn btn-outline" id="backToDashboardBtn">Back to Dashboard</button>
+                    <button class="btn btn-primary" id="applicantLogoutBtn">Logout</button>
+                </div>
+            </div>
+            
+            <div class="form-container">
+                <h2><i class="fas fa-search"></i> Find Your Dream Job</h2>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Job title, keywords, or company">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Location">
+                </div>
+                <button class="btn btn-primary" style="width: 100%;">Search Jobs</button>
+            </div>
+            
+            <h3 style="margin: 2rem 0 1rem;">Recommended For You</h3>
+            <div class="job-listings">
+                <div class="job-listing">
+                    <div class="company-logo">TC</div>
+                    <div class="job-title">Frontend Developer</div>
+                    <div class="company-name">TechCorp Inc.</div>
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                    </div>
+                    <p>We're looking for a skilled frontend developer to join our growing team and help build amazing user experiences.</p>
+                    <div class="job-features">
+                        <span class="feature">React</span>
+                        <span class="feature">JavaScript</span>
+                        <span class="feature">CSS</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Apply Now</button>
+                </div>
+                
+                <div class="job-listing">
+                    <div class="company-logo">DS</div>
+                    <div class="job-title">UX Designer</div>
+                    <div class="company-name">DesignStudio</div>
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> New York, NY</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                    </div>
+                    <p>Join our design team to create beautiful and intuitive user experiences for our products.</p>
+                    <div class="job-features">
+                        <span class="feature">Figma</span>
+                        <span class="feature">UI/UX</span>
+                        <span class="feature">Prototyping</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Apply Now</button>
+                </div>
+                
+                <div class="job-listing">
+                    <div class="company-logo">AI</div>
+                    <div class="job-title">Data Scientist</div>
+                    <div class="company-name">Analytics Inc</div>
+                    <div class="job-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> San Francisco, CA</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                    </div>
+                    <p>Help us derive insights from large datasets and build predictive models to drive business decisions.</p>
+                    <div class="job-features">
+                        <span class="feature">Python</span>
+                        <span class="feature">Machine Learning</span>
+                        <span class="feature">SQL</span>
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Apply Now</button>
+                </div>
+            </div>
+            
+            <div class="upload-section">
+                <div class="form-container">
+                    <h2><i class="fas fa-file-upload"></i> Upload Your Documents</h2>
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & drop your resume, cover letter, or other documents here</p>
+                        <p>or</p>
+                        <button class="btn btn-primary">Browse Files</button>
+                    </div>
+                    
+                    <div class="uploaded-files">
+                        <h3>Uploaded Files</h3>
+                        <div class="file-item">
+                            <div class="file-info">
+                                <i class="fas fa-file-pdf file-icon"></i>
+                                <div>
+                                    <div>John_Smith_Resume.pdf</div>
+                                    <div style="font-size: 0.8rem; color: #6c757d;">Uploaded: Today, 10:30 AM</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline btn-sm">Remove</button>
+                        </div>
+                        
+                        <div class="file-item">
+                            <div class="file-info">
+                                <i class="fas fa-file-alt file-icon"></i>
+                                <div>
+                                    <div>Cover_Letter.docx</div>
+                                    <div style="font-size: 0.8rem; color: #6c757d;">Uploaded: Yesterday, 2:15 PM</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline btn-sm">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>JobMatch AI</h3>
+                    <p>Revolutionizing recruitment with artificial intelligence and smart matching algorithms.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> info@jobmatchai.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> San Francisco, CA</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 JobMatch AI. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const getStartedBtn = document.getElementById('getStartedBtn');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginFormElement = document.getElementById('loginFormElement');
+        const registerFormElement = document.getElementById('registerFormElement');
+        const ownerDashboard = document.getElementById('ownerDashboard');
+        const testApplicantView = document.getElementById('testApplicantView');
+        const testAsApplicantBtn = document.getElementById('testAsApplicantBtn');
+        const backToDashboardBtn = document.getElementById('backToDashboardBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const applicantLogoutBtn = document.getElementById('applicantLogoutBtn');
+        const navItems = document.querySelectorAll('.nav-item');
+        const uploadArea = document.getElementById('uploadArea');
+
+        // Show login form
+        loginBtn.addEventListener('click', () => {
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+        });
+
+        // Show register form
+        registerBtn.addEventListener('click', () => {
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        // Get started button
+        getStartedBtn.addEventListener('click', () => {
+            registerForm.style.display = 'block';
+            loginForm.style.display = 'none';
+        });
+
+        // Switch to register form
+        showRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+
+        // Switch to login form
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Login form submission
+        loginFormElement.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const userType = document.getElementById('userType').value;
+            
+            if (userType === 'employer') {
+                loginForm.style.display = 'none';
+                ownerDashboard.style.display = 'block';
+            } else {
+                loginForm.style.display = 'none';
+                testApplicantView.style.display = 'block';
+            }
+        });
+
+        // Register form submission
+        registerFormElement.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const userType = document.getElementById('registerType').value;
+            
+            if (userType === 'employer') {
+                registerForm.style.display = 'none';
+                ownerDashboard.style.display = 'block';
+            } else {
+                registerForm.style.display = 'none';
+                testApplicantView.style.display = 'block';
+            }
+        });
+
+        // Test as applicant
+        testAsApplicantBtn.addEventListener('click', () => {
+            ownerDashboard.style.display = 'none';
+            testApplicantView.style.display = 'block';
+        });
+
+        // Back to dashboard
+        backToDashboardBtn.addEventListener('click', () => {
+            testApplicantView.style.display = 'none';
+            ownerDashboard.style.display = 'block';
+        });
+
+        // Logout from owner dashboard
+        logoutBtn.addEventListener('click', () => {
+            ownerDashboard.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Logout from applicant view
+        applicantLogoutBtn.addEventListener('click', () => {
+            testApplicantView.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+
+        // Dashboard navigation
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove active class from all items
+                navItems.forEach(nav => nav.classList.remove('active'));
+                // Add active class to clicked item
+                item.classList.add('active');
+                
+                // Hide all tab content
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.style.display = 'none';
+                });
+                
+                // Show selected tab content
+                const tabId = item.getAttribute('data-tab');
+                document.getElementById(tabId).style.display = 'grid';
+            });
+        });
+
+        // File upload area interaction
+        uploadArea.addEventListener('click', () => {
+            alert('File upload dialog would open here in a real application');
+        });
+
+        // Simulate file drag and drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#4361ee';
+            uploadArea.style.backgroundColor = '#f8f9fa';
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '#ddd';
+            uploadArea.style.backgroundColor = 'transparent';
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#ddd';
+            uploadArea.style.backgroundColor = 'transparent';
+            alert('Files would be uploaded here in a real application');
+        });
+    </script>
+</body>
+</html>
